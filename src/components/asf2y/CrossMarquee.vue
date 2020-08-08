@@ -59,9 +59,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../utils/global.sass'
+
 .crossMarqueWrap
   position: relative
-  background-color: #FFFFFF
 
 .crossMarqueText
   text-align: left
@@ -69,14 +70,14 @@ export default {
   line-height: 1
   width: 100%
   overflow: hidden
-  font-size: 10rem
+  font-size: $marqueeFontLg
   text-stroke: 1px black
   -webkit-text-stroke: 1px black
   color: rgba(0, 0, 0, 0)
 
-@media (max-width: 1199.98px)
+@media (max-width: $lg)
   .crossMarqueText
-    font-size: 5rem
+    font-size: $marqueeFontSm
 
 .crossMarqueSectionWrap
   position: absolute

@@ -1,8 +1,13 @@
 <template>
   <div class="asf2y" ref="asf2y">
-    <Title v-if="displays.title" ref="title"> </Title>
-    <S1 ref="s1"> </S1>
-    <S2> </S2>
+    <section ref="sectionT">
+      <Title v-if="findIsShow('title')"> </Title>
+    </section>
+    <section ref="section1" id="s1">
+      <S1 v-if="findIsShow('s1')"> </S1>
+    </section>
+    <section><S2 v-if="findIsShow('s2')"> </S2></section>
+
     <!-- <S3></S3> -->
   </div>
 </template>
@@ -23,11 +28,16 @@ export default {
 
     // S3
   },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll)
+  },
   data: function() {
     return {
-      displays: {
-        title: true
-      }
+      screens: ['title', 's1', 's2'],
+      current: ['title', 's1']
     }
   },
   methods: {
@@ -50,6 +60,13 @@ export default {
       ) {
         this.toTarget('#s1')
       }
+      const idx = Math.floor(window.scrollY / window.innerHeight)
+
+      if (idx === 0) {
+        this.current = this.screens.slice(0, 2)
+      } else {
+        this.current = this.screens.slice(idx, idx + 2)
+      }
     },
     toTarget(target) {
       let toElement = document.querySelector(target)
@@ -57,22 +74,20 @@ export default {
         duration: 100,
         easing: 'ease-in'
       })
+    },
+    findIsShow: function(key) {
+      return !!this.current.find(i => i === key)
     }
-  },
-  mounted() {
-    window.addEventListener('scroll', this.onScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll)
   }
 }
 let lastScrollTop = window.pageYOffset
 </script>
-<style scoped>
-.asf2y {
-  overflow: hidden;
-}
-.asf2y > section {
-  width: 100%;
-}
+<style scoped lang="sass">
+.asf2y
+  overflow: hidden
+  &>section
+    height: 100vh
+    &>div
+      width: 100%
+      height: 100%
 </style>

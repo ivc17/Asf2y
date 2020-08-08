@@ -1,6 +1,15 @@
 <template>
-  <section class="s1" id="s1">
+  <div class="s1">
     <div class="s1-wrap">
+      <div class="marqueePosition">
+        <smooth-marquee
+          :content="content"
+          v-show="!isOnScroll"
+        ></smooth-marquee>
+      </div>
+      <div class="marqueePosition2" v-show="isOnScroll">
+        <cross-marquee :content="content"></cross-marquee>
+      </div>
       <div class="notificationPosition">
         <Notification
           v-show="current === 'storm'"
@@ -16,14 +25,8 @@
           :timing="timing2"
         ></Notification>
       </div>
-      <div class="marqueePosition">
-        <smooth-marquee :content="content"></smooth-marquee>
-      </div>
-      <div class="marqueePosition2" v-show="isOnScroll">
-        <cross-marquee :content="content"></cross-marquee>
-      </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -46,7 +49,7 @@ export default {
       timing1: 600,
       timing2: 400,
       thxProgress: [0, 60, 220, 370.5, 370.5, 0],
-      stormProgress: [0, 220, 220, 220, 0, 0],
+      stormProgress: [0, 220, 220, 220, 220, 0],
       isOnScroll: false
     }
   },
@@ -58,7 +61,7 @@ export default {
   mounted() {
     this.intervalId = setInterval(
       this.changeImage,
-      this.stormProgress.length * this.timing1
+      this.stormProgress.length * this.timing2
     )
     window.addEventListener('scroll', this.handleScroll)
   },
@@ -76,20 +79,17 @@ export default {
     },
     handleScroll() {
       this.isOnScroll = true
-      setTimeout(() => (this.isOnScroll = false), 500)
+      setTimeout(() => (this.isOnScroll = false), 700)
     }
   }
 }
 </script>
 
 <style scoped lang="sass">
-@import "../../utils/global.sass"
-
 .s1
   height: 100vh
   width: 100%
   overflow: hidden
-  z-index: 1
 
 .s1-wrap
   position: relative
@@ -100,9 +100,7 @@ export default {
   position: absolute
   left: 50%
   top: 50%
-  z-index: 3
   transform: translateX(-50%) translateY(-50%)
-
 
 .marqueePosition
   height: 100%
@@ -112,5 +110,4 @@ export default {
   top: 0
   left: 0
   position: absolute
-  z-index: 2
 </style>

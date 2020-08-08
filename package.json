@@ -11,9 +11,11 @@
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
     "three": "^0.119.1",
+    "typed.js": "^2.0.11",
     "velocity-animate": "^1.5.2",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "vue-typed-js": "^0.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
@@ -45,7 +47,16 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "overrides": [
+      {
+        "files": [
+          "**/*.vue"
+        ],
+        "rules": {
+          "no-unexpected-multiline": 0
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",

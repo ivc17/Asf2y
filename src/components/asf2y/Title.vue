@@ -1,11 +1,11 @@
 <template>
-  <section class="wrap-titles">
+  <div class="wrap-titles">
     <div class="titles">
       <div class="titles-position">
         <Crt :data-text="eng"></Crt> <Crt :data-text="mand"></Crt>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">

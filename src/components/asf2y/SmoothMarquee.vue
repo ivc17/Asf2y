@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../utils/global.sass'
+
 .smoothMarqueWrap
   height: 100%
 
@@ -45,16 +47,16 @@ export default {
   top: 0
   width: 100%
   overflow: hidden
-  font-size: 10rem
+  font-size: $marqueeFontLg
   text-stroke: 1px black
   line-height: 1
   -webkit-text-stroke: 1px black
   color: rgba(0, 0, 0, 0)
   transform: translateX(0)
 
-@media (max-width: 1199.98px)
+@media (max-width: $lg)
   .title
-    font-size: 5rem
+    font-size: $marqueeFontSm
 
 .marquee1
   animation-name: shift

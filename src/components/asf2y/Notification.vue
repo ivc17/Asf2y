@@ -49,6 +49,8 @@ export default {
 </script>
 
 <style lang="sass">
+@import '../../utils/global.sass'
+
 .notification
   width: 50vw
   max-width: 600px
@@ -57,7 +59,7 @@ export default {
     overflow: hidden
     transition: .5s ease-in
 
-@media (max-width: 1199.98px)
+@media (max-width: $lg)
   .notification
     width: 90vw
 </style>

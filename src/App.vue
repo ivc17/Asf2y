@@ -4,13 +4,17 @@
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #000000;
-  font-family: 'Noto Serif', 'Noto Serif TC', 'Noto Serif JP', sans-serif;
-}
+<style lang="sass">
+@import './utils/global.sass'
+*
+  box-sizing: border-box
+
+#app
+  font-family: Avenir, Helvetica, Arial, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  text-align: center
+  color: #000000
+  font-family: $fontFamily
+  min-width: $xs
 </style>
