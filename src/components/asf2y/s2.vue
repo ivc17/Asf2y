@@ -22,19 +22,18 @@
     <div class="imageMarqueeWarp">
       <ImageMarquee
         :content="['line', 'line2']"
-        classname="marqueeImg"
+        class="marqueeImg"
         :imgStyle="{ height: '100%', width: '50vw' }"
-      >
-      </ImageMarquee>
+      ></ImageMarquee>
     </div>
     <div class="convoWrap">
       <Notification
         name="dinner"
         v-if="convoInView"
-        :progress="[0, 100, 200, 270, 340, 450, 570, 650, 730]"
-        :timing="1000"
-      >
-      </Notification>
+        :progress="[0, 100, 200, 270, 340, 450, 570, 650, 730, 730, 0]"
+        :timing="400"
+        :transitionTime="0.3"
+      ></Notification>
     </div>
   </div>
 </template>
@@ -76,20 +75,14 @@ export default {
     const ctx = canvas.getContext('2d')
     this.ctx = ctx
     this.initPath(ctx)
-    const top = this.$refs.s2.getBoundingClientRect().top
-    if (top < window.innerHeight && top > -window.innerHeight) {
-      this.inView = true
-    }
-    if (top < window.innerHeight / 2 && top > 0) {
-      this.blockInView = true
-    }
-
-    if (top < window.innerHeight / 2 && top > -window.innerHeight) {
-      this.convoInView = true
-    }
+    this.handleScroll()
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener(
+      'resize',
+      this.resize(document.getElementById('s2Canvas'))
+    )
     this.closePath()
     clearInterval(this.intervalId)
   },
@@ -100,16 +93,26 @@ export default {
   },
   methods: {
     handleScroll() {
-      const top = this.$refs.s2.getBoundingClientRect().top
-      if (top < window.innerHeight / 2 && top > 0) {
+      const { top, bottom } = this.$refs.s2.getBoundingClientRect()
+      const halfH = window.innerHeight / 2
+      if (top < halfH && top > 0) {
         this.blockInView = true
       } else {
         this.blockInView = false
       }
-      if (top < window.innerHeight / 2 && top > -window.innerHeight) {
+      if (top < window.innerHeight && top > -window.innerHeight) {
+        this.inView = true
+      }
+      if (
+        top < halfH &&
+        top > -window.innerHeight &&
+        !this.blockInView &&
+        bottom > halfH
+      ) {
         this.convoInView = true
       } else {
         this.convoInView = false
+        this.notifInView = false
       }
     },
     enter: function(el) {

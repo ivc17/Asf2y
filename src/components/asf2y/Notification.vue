@@ -2,7 +2,10 @@
   <div
     class="notification wrap"
     ref="notifWrap"
-    :style="{ height: height + 'px' }"
+    :style="{
+      height: height + 'px',
+      transition: transitionTime ? transitionTime + 's ease-in' : '.5s ease-in'
+    }"
   >
     <img :src="src" class="notification" />
   </div>
@@ -11,7 +14,7 @@
 <script>
 export default {
   name: 'Notification',
-  props: ['name', 'progress', 'delay', 'timing'],
+  props: ['name', 'progress', 'delay', 'timing', 'transitionTime'],
   data: function() {
     return {
       height: 0,

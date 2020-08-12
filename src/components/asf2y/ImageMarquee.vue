@@ -1,12 +1,5 @@
 <template>
   <div :class="['imageMarqueWrap', classname]">
-    <!-- <div
-      :class="'marquee' + (idx + 1) + ' marquee'"
-      v-for="(i, idx) in srcs"
-      :key="i"
-    >
-      <img :src="i" :style="imgStyle" />
-    </div> -->
     <div class="marquee1 marquee">
       <img v-for="i in srcs" :src="i" :key="i" :style="imgStyle" />
     </div>

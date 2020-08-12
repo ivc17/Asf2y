@@ -1,14 +1,23 @@
 <template>
   <div class="asf2y" ref="asf2y">
     <section ref="sectionT">
-      <Title v-if="findIsShow('title')"> </Title>
+      <Title v-if="findIsShow('title')"></Title>
     </section>
     <section ref="section1" id="s1">
-      <S1 v-if="findIsShow('s1')"> </S1>
+      <S1 v-if="findIsShow('s1')"></S1>
     </section>
-    <section><S2 v-if="findIsShow('s2')"> </S2></section>
-
-    <!-- <S3></S3> -->
+    <section>
+      <S2 v-if="findIsShow('s2')"></S2>
+    </section>
+    <section>
+      <S3 v-if="findIsShow('s3')"></S3>
+    </section>
+    <section>
+      <S4 v-if="findIsShow('s4')"></S4>
+    </section>
+    <section>
+      <S5 v-if="findIsShow('s5')"></S5>
+    </section>
   </div>
 </template>
 
@@ -17,16 +26,19 @@ import Velocity from 'velocity-animate'
 import Title from '@/components/asf2y/Title.vue'
 import S1 from '@/components/asf2y/s1.vue'
 import S2 from '@/components/asf2y/s2.vue'
-// import S3 from '@/components/asf2y/s3.vue'
+import S3 from '@/components/asf2y/s3.vue'
+import S4 from '@/components/asf2y/s4.vue'
+import S5 from '@/components/asf2y/s5.vue'
 
 export default {
   name: 'asf2y',
   components: {
     Title,
     S1,
-    S2
-
-    // S3
+    S2,
+    S3,
+    S4,
+    S5
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll)
@@ -36,7 +48,7 @@ export default {
   },
   data: function() {
     return {
-      screens: ['title', 's1', 's2'],
+      screens: ['title', 's1', 's2', 's3', 's4', 's5'],
       current: ['title', 's1']
     }
   },
