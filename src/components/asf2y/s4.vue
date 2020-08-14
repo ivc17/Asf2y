@@ -1,8 +1,8 @@
 <template>
   <div class="s4" ref="s4">
-    <!-- <div class="bamboo">
+    <div class="bamboo">
       <img src="@/assets/bamboo.png" />
-    </div>-->
+    </div>
     <div class="shreds">
       <img src="@/assets/shreds.png" />
     </div>
@@ -127,17 +127,17 @@ export default {
   100%
     transform: translateY(-100%)
 
-// .bamboo
-//   height: 50%
-//   width: 80%
-//   position: absolute
-//   left: 0
-//   bottom: 0
-//   z-index: -1
-//   img
-//     width: 100%
-//     height: 100%
-//     object-fit: cover
+.bamboo
+  height: 50%
+  width: 80%
+  position: absolute
+  left: 0
+  bottom: 0
+  z-index: -1
+  img
+    width: 100%
+    height: 100%
+    object-fit: cover
 .andJuly
   position: absolute
   height: 40%
@@ -178,12 +178,13 @@ export default {
   .shreds
     width: 100%
     height: 100%
-    transform: translateX(0) translateY(0)
     left: 0
     bottom: 0
+    transform: translateX(0)
     img
+      width: 100%
+      height: 100%
       object-fit: cover
-      transform: rotate(180deg)
       z-index: 1
 </style>
 <style lang="sass">

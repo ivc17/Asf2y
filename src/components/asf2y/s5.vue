@@ -1,9 +1,11 @@
 <template>
   <div class="s5" ref="s5">
+    <div id="s5SvgContainer" v-html="svg"></div>
     <div class="notThereYet">
-      <span>Not there yet. </span>
-      <span>Not there yet. </span>
-      <span>Not there yet. </span>
+      <span>Not there yet.</span>
+      <span>Not there yet.</span>
+      <span>Not there yet.</span>
+      <span>Not there yet.</span>
     </div>
     <canvas id="s5Canvas" ref="s5Canvas"></canvas>
   </div>
@@ -12,19 +14,21 @@
 <script lang="ts">
 import * as THREE from 'three'
 import { Water } from 'three/examples/jsm/objects/Water.js'
+// import { breakpoints } from '@/utils/breakpoints.js'
 
 export default {
   name: 'S5',
   mounted() {
     this.initCanvas()
     window.addEventListener('resize', this.handleResize, false)
+    this.handleSvg()
   },
   beforeDestroy() {
     this.inView = false
     window.removeEventListener('resize', this.handleResize)
   },
   data: function() {
-    return { inView: false }
+    return { inView: false, svg: '' }
   },
   methods: {
     initCanvas: function() {
@@ -107,8 +111,13 @@ export default {
     handleResize: function() {
       camera.aspect = window.innerWidth / window.innerHeight
       camera.updateProjectionMatrix()
-
+      this.handleSvg()
       renderer.setSize(window.innerWidth, window.innerHeight)
+    },
+    handleSvg: function() {
+      this.svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${window.innerWidth} ${window.innerHeight} ${window.innerWidth} ${window.innerHeight}">
+     <path d="M 0 10 h ${window.innerWidth} v ${window.innerHeight}" />
+     </svg>`
     }
   }
 }
@@ -123,6 +132,13 @@ var camera, scene, renderer, water
   overflow: hidden
 
 #s3Canvas
+  height: 100%
+  width: 100%
+
+#s5SvgContainer
+  position: absolute
+  top: 0
+  left: 0
   height: 100%
   width: 100%
 
@@ -148,9 +164,6 @@ var camera, scene, renderer, water
     transform: translateY(-50%)
   100%
     transform: translateY(0%)
-
-
-
 
 @media (max-width: $lg)
   .notThereYet

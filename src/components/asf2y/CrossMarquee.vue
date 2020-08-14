@@ -79,6 +79,10 @@ export default {
   .crossMarqueText
     font-size: $marqueeFontSm
 
+@media (min-width: 1900px)
+  .crossMarqueText
+    font-size: 13rem
+
 .crossMarqueSectionWrap
   position: absolute
   top: 0

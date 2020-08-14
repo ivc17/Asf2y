@@ -18,6 +18,12 @@
     <section>
       <S5 v-if="findIsShow('s5')"></S5>
     </section>
+    <section>
+      <S6 v-if="findIsShow('s6')"></S6>
+    </section>
+    <section>
+      <S7 v-if="findIsShow('s7')"></S7>
+    </section>
   </div>
 </template>
 
@@ -29,6 +35,8 @@ import S2 from '@/components/asf2y/s2.vue'
 import S3 from '@/components/asf2y/s3.vue'
 import S4 from '@/components/asf2y/s4.vue'
 import S5 from '@/components/asf2y/s5.vue'
+import S6 from '@/components/asf2y/s6.vue'
+import S7 from '@/components/asf2y/s7.vue'
 
 export default {
   name: 'asf2y',
@@ -38,7 +46,9 @@ export default {
     S2,
     S3,
     S4,
-    S5
+    S5,
+    S6,
+    S7
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll)
@@ -48,7 +58,7 @@ export default {
   },
   data: function() {
     return {
-      screens: ['title', 's1', 's2', 's3', 's4', 's5'],
+      screens: ['title', 's1', 's2', 's3', 's4', 's5', 's6', 's7'],
       current: ['title', 's1']
     }
   },
@@ -95,8 +105,10 @@ export default {
 let lastScrollTop = window.pageYOffset
 </script>
 <style scoped lang="sass">
+@import '@/utils/global.sass'
 .asf2y
   overflow: hidden
+  min-width: $xs
   &>section
     height: 100vh
     &>div

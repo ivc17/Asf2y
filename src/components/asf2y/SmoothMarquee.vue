@@ -58,6 +58,10 @@ export default {
   .title
     font-size: $marqueeFontSm
 
+@media (min-width: 1900px)
+  .title
+    font-size: 13rem
+
 .marquee1
   animation-name: shift
   animation-duration: 5s
