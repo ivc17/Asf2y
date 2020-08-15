@@ -23,7 +23,6 @@
       <ImageMarquee
         :content="['line', 'line2']"
         class="marqueeImg"
-        :imgStyle="{ height: '100%', width: '50vw' }"
       ></ImageMarquee>
     </div>
     <div class="convoWrap">
@@ -95,14 +94,9 @@ export default {
     handleScroll() {
       const { top, bottom } = this.$refs.s2.getBoundingClientRect()
       const halfH = window.innerHeight / 2
-      if (top < halfH && top > 0) {
-        this.blockInView = true
-      } else {
-        this.blockInView = false
-      }
-      if (top < window.innerHeight && top > -window.innerHeight) {
-        this.inView = true
-      }
+      this.blockInView = top < halfH && top > 0
+      this.inView = top < window.innerHeight && top > -window.innerHeight
+
       if (
         top < halfH &&
         top > -window.innerHeight &&
@@ -205,17 +199,17 @@ let pY = 0
     margin-right: 0
     margin-left: auto
 
+.imageMarqueeWarp
+  transform: translateY(-2px)
+.marqueeImg
+  height: 50vh
+
 @media (max-width: $md)
   .block
     width: 50vw
     min-width: 200px
   .notifWrap
     width: 90vw
-
-.imageMarqueeWarp
-  transform: translateY(-2px)
-.marqueeImg
-  height: 50vh
 
 .convoWrap
   position: fixed

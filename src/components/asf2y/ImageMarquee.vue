@@ -1,17 +1,17 @@
 <template>
   <div :class="['imageMarqueWrap', classname]">
     <div class="marquee1 marquee">
-      <img v-for="i in srcs" :src="i" :key="i" :style="imgStyle" />
+      <img v-for="i in srcs" :src="i" :key="i" />
     </div>
     <div class="marquee2 marquee">
-      <img v-for="i in srcs" :src="i" :key="i" :style="imgStyle" />
+      <img v-for="i in srcs" :src="i" :key="i" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['content', 'classname', 'imgStyle'],
+  props: ['content', 'classname'],
   name: 'LoopMarquee',
 
   data: function() {
@@ -41,6 +41,10 @@ export default {
   height: 100%
   width: 100%
   display: flex
+  img
+    height: 100%
+    width: 50vw
+    object-fit: cover
 
 .marquee1
   position: absolute
@@ -71,6 +75,13 @@ export default {
 @keyframes shift2
   from
     transform: translateX(-100%)
+
+  to
+    transform: translateX(0%)
+
+@keyframes shift3
+  from
+    transform: translateX(-50%)
 
   to
     transform: translateX(0%)

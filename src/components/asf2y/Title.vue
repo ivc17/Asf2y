@@ -2,7 +2,8 @@
   <div class="wrap-titles">
     <div class="titles">
       <div class="titles-position">
-        <Crt :data-text="eng"></Crt> <Crt :data-text="mand"></Crt>
+        <Crt :data-text="mand" classname="mand"></Crt>
+        <Crt :data-text="eng"></Crt>
       </div>
     </div>
   </div>
@@ -112,14 +113,13 @@ export default {
 }
 </script>
 
-<style scoped>
-.titles {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.titles-position {
-  transform: translateY(-50%);
-}
+<style lang="sass">
+.titles
+  height: 100vh
+  display: flex
+  align-items: center
+  justify-content: center
+
+.titles-position
+  transform: translateY(-50%)
 </style>

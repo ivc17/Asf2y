@@ -1,13 +1,25 @@
 <template>
   <div class="crt-wrap">
-    <h1 class="mainTtitle" :data-text="dataText">{{ dataText }}</h1>
+    <h1
+      :class="{ mainTtitle: true, [classname]: !!classname }"
+      :data-text="dataText"
+    >
+      {{ dataText }}
+    </h1>
   </div>
 </template>
 
 <script lang="ts">
 export default {
   name: 'Crt',
-  props: ['data-text']
+  props: {
+    dataText: {
+      required: true
+    },
+    classname: {
+      type: String
+    }
+  }
 }
 </script>
 <style scoped>
@@ -21,6 +33,12 @@ export default {
   color: transparent;
   animation: textShadow 3s infinite;
 }
+@media (max-width: 1000px) {
+  .mainTtitle {
+    font-size: 3rem;
+  }
+}
+
 .mainTtitle::before {
   content: attr(data-text);
   display: block;
@@ -36,7 +54,6 @@ export default {
       rgba(0, 255, 0, 0.02),
       rgba(0, 0, 255, 0.06)
     );
-  /* z-index: 2; */
   background-size: 100% 2px, 3px 100%;
   pointer-events: none;
   background-clip: text;
@@ -53,7 +70,6 @@ export default {
   right: 0;
   background: rgba(18, 16, 16, 0.1);
   opacity: 0;
-  /* z-index: 2; */
   pointer-events: none;
   animation: flicker 0.15s infinite;
   background-clip: text;

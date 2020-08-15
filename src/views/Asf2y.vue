@@ -24,6 +24,12 @@
     <section>
       <S7 v-if="findIsShow('s7')"></S7>
     </section>
+    <section>
+      <S8 v-if="findIsShow('s8')"></S8>
+    </section>
+    <section>
+      <S9 v-if="findIsShow('s9')"></S9>
+    </section>
   </div>
 </template>
 
@@ -37,6 +43,8 @@ import S4 from '@/components/asf2y/s4.vue'
 import S5 from '@/components/asf2y/s5.vue'
 import S6 from '@/components/asf2y/s6.vue'
 import S7 from '@/components/asf2y/s7.vue'
+import S8 from '@/components/asf2y/s8.vue'
+import S9 from '@/components/asf2y/s9.vue'
 
 export default {
   name: 'asf2y',
@@ -48,7 +56,9 @@ export default {
     S4,
     S5,
     S6,
-    S7
+    S7,
+    S8,
+    S9
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll)
@@ -58,7 +68,7 @@ export default {
   },
   data: function() {
     return {
-      screens: ['title', 's1', 's2', 's3', 's4', 's5', 's6', 's7'],
+      screens: ['title', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9'],
       current: ['title', 's1']
     }
   },

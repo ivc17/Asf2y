@@ -8,6 +8,7 @@
 @import './utils/global.sass'
 *
   box-sizing: border-box
+  transition: .5s
 
 #app
   font-family: Avenir, Helvetica, Arial, sans-serif

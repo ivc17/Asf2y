@@ -162,12 +162,7 @@ export default {
       const glitchPass = new GlitchPass()
       composer.addPass(glitchPass)
 
-      const filmPass = new FilmPass(
-        0.1, // noise intensity
-        0.3, // scanline intensity
-        648, // scanline count
-        0 // grayscale
-      )
+      const filmPass = new FilmPass(0.1, 0.3, 648, 0)
       filmPass.renderToScreen = true
       composer.addPass(filmPass)
 
@@ -246,7 +241,6 @@ export default {
 .parallex
   position: fixed
   bottom: 100px
-  transition: 500
 
 @media (min-width: $lg)
   .sun

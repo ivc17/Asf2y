@@ -143,9 +143,6 @@ export default {
   height: 40%
   width: 40%
   top: 30%
-  left: 0
-  transform: translateX(-50px)
-  background-color: #FFFFFF
   div
     overflow: hidden
     height: 100%
@@ -153,7 +150,6 @@ export default {
     position: relative
     img
       position: absolute
-      top: -6px
       width: 300%
       animation: showProcess 2s infinite
       animation-timing-function: step-end
@@ -168,6 +164,14 @@ export default {
   100%
     left: -200%
 
+@media (max-width: 1750px)
+  .shreds
+    right: 0
+    left: unset
+    top: unset
+    bottom: 350px
+    transform: translateX(0)
+
 @media (max-width: $lg)
   .andJuly
     top: 40px
@@ -179,13 +183,18 @@ export default {
     width: 100%
     height: 100%
     left: 0
-    bottom: 0
+    top: 40px
     transform: translateX(0)
     img
       width: 100%
       height: 100%
       object-fit: cover
       z-index: 1
+  .bamboo
+    z-index: 2
+    width: 100px
+    bottom: 120px
+    left: 30px
 </style>
 <style lang="sass">
 @import '@/utils/global.sass'
@@ -244,10 +253,14 @@ export default {
     &:nth-child(5n):after,
       transform: rotate(2deg) skewx(-6deg)
 
+@media (max-width: 1400px)
+  .s4Text
+    bottom: 120px
+
 @media (max-width: $md)
   .s4Text
-    bottom: 12rem
-    right: 2rem
+    bottom: 210px
+    right: 30px
     font-size: 16px
     line-height: 26px
 </style>

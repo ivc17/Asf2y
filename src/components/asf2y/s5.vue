@@ -1,34 +1,52 @@
 <template>
   <div class="s5" ref="s5">
     <div id="s5SvgContainer" v-html="svg"></div>
-    <div class="notThereYet">
-      <span>Not there yet.</span>
-      <span>Not there yet.</span>
-      <span>Not there yet.</span>
-      <span>Not there yet.</span>
-    </div>
     <canvas id="s5Canvas" ref="s5Canvas"></canvas>
+    <Haiji
+      :haijiInView="haijiInView"
+      :haijiHeight="haijiHeight"
+      class="haijiClassS5"
+      :styles="{ top: haijiTop + 'px' }"
+    ></Haiji>
   </div>
 </template>
 
 <script lang="ts">
 import * as THREE from 'three'
 import { Water } from 'three/examples/jsm/objects/Water.js'
-// import { breakpoints } from '@/utils/breakpoints.js'
+import { breakpoints } from '@/utils/breakpoints.js'
+import Haiji from './Haiji.vue'
 
 export default {
   name: 'S5',
+  components: { Haiji },
   mounted() {
     this.initCanvas()
     window.addEventListener('resize', this.handleResize, false)
+    window.addEventListener('scroll', this.handleScroll)
     this.handleSvg()
+    this.intervalId = setInterval(() => {
+      this.moveText()
+    }, 1)
+    this.haijiTop = window.innerHeight - 300
   },
   beforeDestroy() {
     this.inView = false
+    clearInterval(this.intervalId)
     window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('scroll', this.handleScroll)
   },
   data: function() {
-    return { inView: false, svg: '' }
+    return {
+      inView: false,
+      svg: '',
+      fontSize: 128,
+      text:
+        'Not there yet. Not there yet. Not there yet. Not there yet. Not there yet. Not there yet. Not there yet.',
+      haijiInView: false,
+      haijiHeight: 0,
+      haijiTop: 0
+    }
   },
   methods: {
     initCanvas: function() {
@@ -67,7 +85,6 @@ export default {
             }
           ),
           alpha: 1,
-          sunDirection: new THREE.Vector3(),
           sunColor: 0xf54263,
           waterColor: 0x275751,
           distortionScale: 5,
@@ -80,17 +97,18 @@ export default {
         const material = new THREE.SpriteMaterial({
           map: map
         })
-        const sprite = new THREE.Sprite(material)
+        x = window.innerWidth < breakpoints.md ? -10 : -30
+        sprite = new THREE.Sprite(material)
         sprite.scale.set(60, 40, 0)
-        sprite.position.set(-20, 100, 150)
+        sprite.position.set(x, 100, 150)
         scene.add(sprite)
-        const sprite2 = new THREE.Sprite(material)
+        sprite2 = new THREE.Sprite(material)
         sprite2.scale.set(60, 40, 0)
-        sprite2.position.set(-20, 63, 150)
+        sprite2.position.set(x, 63, 150)
         scene.add(sprite2)
-        const sprite3 = new THREE.Sprite(material)
+        sprite3 = new THREE.Sprite(material)
         sprite3.scale.set(60, 40, 0)
-        sprite3.position.set(-20, 20, 150)
+        sprite3.position.set(x, 20, 150)
         scene.add(sprite3)
       }
 
@@ -111,20 +129,71 @@ export default {
     handleResize: function() {
       camera.aspect = window.innerWidth / window.innerHeight
       camera.updateProjectionMatrix()
-      this.handleSvg()
+      sprite.position.set(x, 100, 150)
+      sprite2.scale.set(60, 40, 0)
+      sprite3.position.set(x, 20, 150)
       renderer.setSize(window.innerWidth, window.innerHeight)
+      this.haijiTop = window.innerHeight - 300
+      this.handleSvg()
     },
     handleSvg: function() {
-      this.svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${window.innerWidth} ${window.innerHeight} ${window.innerWidth} ${window.innerHeight}">
-     <path d="M 0 10 h ${window.innerWidth} v ${window.innerHeight}" />
+      this.getFontSize()
+      this.svg = `<svg xmlns="http://www.w3.org/2000/svg" height="${
+        window.innerHeight
+      }" width="${window.innerWidth}">
+     <path id="p" d="m 0 ${this.fontSize} H ${window.innerWidth -
+        this.fontSize} V ${
+        window.innerHeight
+      }" fill='none'/> <text width="100%" style="transform:translate3d(0,0,0);" x-link:href="#p">
+
+        <textPath  class="notThereYet" style="stroke:#FFFFFF;stroke-width:1px" alignment-baseline="center" xlink:href="#p">${
+          this.text
+        }</textPath>
+    </text>
      </svg>`
+    },
+    getFontSize: function() {
+      if (window.innerWidth < breakpoints.lg) {
+        this.fontSize = 100
+      } else {
+        this.fontSize = 128
+      }
+    },
+    moveText: function() {
+      const el = document.querySelector('.notThereYet')
+      if (offset > 0) offset = -50
+      offset += 0.04
+      el.setAttribute('startOffset', offset + '%')
+    },
+    handleScroll: function() {
+      const { bottom } = this.$refs.s5.getBoundingClientRect()
+
+      if (bottom < window.innerHeight) {
+        const ratio =
+          Math.round(
+            ((window.innerHeight - bottom) / window.innerHeight) * 100
+          ) / 100
+        if (bottom < window.innerHeight - 60) this.haijiInView = true
+        this.haijiHeight = ratio * window.innerHeight
+      } else {
+        this.haijiInView = false
+      }
     }
   }
 }
-var camera, scene, renderer, water
+var offset = -50
+
+var camera,
+  scene,
+  renderer,
+  water,
+  x = 30,
+  sprite,
+  sprite2,
+  sprite3
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 @import '../../utils/global.sass'
 
 .s5
@@ -143,29 +212,17 @@ var camera, scene, renderer, water
   width: 100%
 
 .notThereYet
-  position: absolute
-  font-size: $marqueeFontLg
-  height: 100%
-  top: 0
-  right: 0
+  font-size: 128px
   text-align: right
-  white-space: nowrap
-  writing-mode: vertical-rl
-  text-orientation: mixed
-  text-stroke: 1px #FFFFFF
-  line-height: 1
-  -webkit-text-stroke: 1px #FFFFFF
+  fill: none
   color: rgba(0, 0, 0, 0)
-  transform: translateY(-50%)
-  animation: marquee 3s linear infinite
-
-@keyframes marquee
-  0%
-    transform: translateY(-50%)
-  100%
-    transform: translateY(0%)
+  start-offset: 0%
 
 @media (max-width: $lg)
   .notThereYet
-    font-size: $marqueeFontSm
+    font-size: 100px
+
+.haijiClassS5
+  bottom: 300px
+  z-index: 3
 </style>
