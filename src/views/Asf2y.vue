@@ -135,7 +135,6 @@ let lastScrollTop = window.pageYOffset
 @import '@/utils/global.sass'
 .asf2y
   overflow: hidden
-  min-width: $xs
   &>section
     height: 100vh
     &>div

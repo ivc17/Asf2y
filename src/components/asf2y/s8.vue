@@ -64,6 +64,7 @@ export default {
     bottom: 2rem
 
 .laugh
+  width: 100%
   position: absolute
   top: 35%
   left: 50%

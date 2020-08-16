@@ -6,9 +6,10 @@
         <Crt :data-text="eng"></Crt>
       </div>
     </div>
-    <div class="sun">
-      <p>太</p>
-      <p>陽</p>
+    <div class="bg">
+      <img src="@/assets/olSun.svg" class="titleBg sun" />
+      <img src="@/assets/olShut.svg" class="titleBg shut" />
+      <img src="@/assets/olSea.svg" class="titleBg sea" />
     </div>
   </div>
 </template>
@@ -117,7 +118,11 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
+@import '../../utils/global.sass'
+.wrap-titles
+  overflow: hidden
+
 .titles
   height: 100vh
   display: flex
@@ -127,12 +132,26 @@ export default {
 .titles-position
   transform: translateY(-50%)
 
-.sun
+.bg
   position: absolute
   top: 0
+  left: 0
+  width: 100vw
+  height: 100%
+  display: flex
+  justify-content: space-between
+
+.titleBg
   font-weight: 900
-  font-size: 30rem
+  font-size: 40rem
   text-stroke: 1px black
   -webkit-text-stroke: 1px black
   color: rgba(0, 0, 0, 0)
+  height: 100%
+  &.sun
+    transform: rotate(180deg)
+
+@media (max-width: $lg)
+  .bg
+    flex-direction: column
 </style>

@@ -38,6 +38,11 @@ export default {
     font-size: 3rem;
   }
 }
+@media (max-width: 500px) {
+  .mainTtitle {
+    font-size: 2rem;
+  }
+}
 
 .mainTtitle::before {
   content: attr(data-text);
@@ -154,6 +159,8 @@ export default {
       -2.6208764473832513px 0 1px rgba(0, 0, 0, 0.4), 0 0 3px;
   }
 }
+</style>
+<style>
 @keyframes flicker {
   0% {
     opacity: 0.27861;

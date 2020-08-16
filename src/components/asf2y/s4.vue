@@ -38,8 +38,8 @@ export default {
         無自由， 無無自由， 無無自由，無無自由 <br> <br> 
         X know XXXXXXXXXX of XXXXXX can't
         XXXXXXXXXXXXXXXX do have problem XXXXXXXXXXXXX indeed#, XX just XXXXXXXXXXXXXXXXXXXXXX. X hope X don't XXXXXXXXXXXXXXXXXXXX important to
-        XX please ... really hope X XXXXXXXXXXXXXXXXXXX<br> <br> 
-        如果如果如果可以無無無無無該多好 那是不是現在都無無無無無無 無無無啊
+        XX please ... really hope XXXXXXXXXXXXXXXXXXXXX<br> <br> 
+        如果如果如果可以無無無無無該多好 那是不是現在都無無無無無無無無無無啊
         不管無無無時間出現 無都會無無無的 真的好遺憾 這麼一個如果
         如果無無無了無無無無無無了無 會不會現在什麼都不一樣了
         真的無無再無無無無無 好好的無對無無無無無啊...`
@@ -193,8 +193,14 @@ export default {
   .bamboo
     z-index: 2
     width: 100px
-    bottom: 120px
+    bottom: 160px
     left: 30px
+@media (max-width: $xs)
+  .bamboo
+    z-index: 2
+    width: 90px
+    bottom: 160px
+    left: 15px
 </style>
 <style lang="sass">
 @import '@/utils/global.sass'
@@ -207,7 +213,7 @@ export default {
   font-size: 20px
   line-height: 30px
   text-align: left
-  word-break: keep-all
+  word-break: break-all
   font-weight: 700
   background-color: #FFFFFF
   padding: 1rem 2rem
@@ -220,6 +226,8 @@ export default {
     user-select: none
     cursor: default
     border-radius: 2px
+    animation: noise .5s linear infinite
+    background-image: url('../../assets/noise.png')
     &:before
       content: ''
       width: 80%
@@ -234,6 +242,8 @@ export default {
       user-select: none
       cursor: default
       border-radius: 2px
+      animation: noise .5s linear infinite
+      background-image: url('../../assets/noise.png')
     &:nth-child(n):before
       transform: rotate(1deg)
     &:nth-child(2n):before
@@ -247,25 +257,61 @@ export default {
       display: inline-block
       position: absolute
       background-color: #000000
+      animation: noise .5s linear infinite
+      background-image: url('../../assets/noise.png')
       transform: rotate(-.5deg) skewx(6deg)
       top: 0
       right: 0
+      &:after
+        content: ''
     &:nth-child(5n):after,
       transform: rotate(2deg) skewx(-6deg)
+
+@keyframes noise
+  50%
+    background-image: url('../../assets/noise3.png')
+  100%
+    background-image: url('../../assets/noise2.png')
+
+.bamboo::before
+  content: attr(data-text)
+  display: block
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),linear-gradient(90deg,rgba(255, 0, 0, 0.06),rgba(0, 255, 0, 0.02),rgba(0, 0, 255, 0.06))
+  background-size: 100% 2px, 3px 100%
+  pointer-events: none
+  color: transparent
+
+.bamboo::after
+  content: attr(data-content)
+  display: block
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  background: rgba(18, 16, 16, 0.1)
+  opacity: 0
+  pointer-events: none
+  animation: flicker 0.15s infinite
+  color: transparent
 
 @media (max-width: 1400px)
   .s4Text
     bottom: 120px
 
-@media (max-width: $md)
+@media (max-width: $xs)
   .s4Text
-    bottom: 210px
-    right: 30px
-    font-size: 16px
-    line-height: 26px
-
-@media (max-height: 800px)
-  .s4Text
+    height: 60%
+    overflow: scroll
     bottom: unset
-    top: 40vh
+    top: 25%
+    right: 30px
+    font-size: 1rem
+    line-height: 1rem
+    line-height: 26px
 </style>

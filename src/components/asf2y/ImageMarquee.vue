@@ -46,6 +46,13 @@ export default {
     width: 50vw
     object-fit: cover
 
+@media (max-width: $md)
+  .marquee
+    img
+      width: 100%
+      &:last-child
+        display: none
+
 .marquee1
   position: absolute
   left: 0

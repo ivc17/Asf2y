@@ -1,13 +1,8 @@
 <template>
   <div class="s9" ref="s9">
     <img class="sunny" src="@/assets/sunny.png" />
-
     <img class="balloons" src="@/assets/balloons.png" />
     <img class="marbleAd" src="@/assets/marbleAd.png" />
-    <!-- <img class src="@/assets/makeSomeoneLaugh.png" /> -->
-    <!-- <img class src="@/assets/candy.png" /> -->
-
-    <img class="fog" src="@/assets/fog.png" />
     <canvas ref="s9Canvas" class="s9Canvas"></canvas>
     <div class="leftCol">
       <div>
@@ -21,20 +16,11 @@
         <img class="underSun" src="@/assets/underSun.png" />
       </div>
     </div>
-    <div class="underTheSun" v-if="underTheSun">
-      <!-- <vue-typed-js
-        :strings="[`今の私は、\n陽だまりの下で\n在海的上面`]"
-        :loop="true"
-        :typeSpeed="130"
-        :showCursor="false"
-        :backDelay="1000"
-        :backSpeed="20"
-      >-->
+    <div :class="{ underTheSun: true, fixed: fixed }" v-if="underTheSun">
       <span class="typing">
         今の私は、
         <br />陽だまりの下で <br />在海的上面
       </span>
-      <!-- </vue-typed-js> -->
     </div>
   </div>
 </template>
@@ -58,7 +44,7 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   data: function() {
-    return { underTheSun: false }
+    return { underTheSun: false, fixed: false }
   },
   methods: {
     initCanvas: function() {
@@ -156,6 +142,7 @@ export default {
     handleScroll: function() {
       const { top } = this.$refs.s9.getBoundingClientRect()
       this.underTheSun = top < window.innerHeight * 0.2
+      this.fixed = top < 20 - window.innerHeight / 2
     }
   }
 }
@@ -186,13 +173,6 @@ var camera,
   top: 20%
   left: 10%
   z-index: 3
-.fog
-  position: absolute
-  right: 0
-  width: 30%
-  height: 30%
-  object-fit: cover
-  top: 30%
 .balloons
   position: absolute
   right: 0
@@ -252,6 +232,11 @@ var camera,
   position: fixed
   bottom: 0
   z-index: 5
+  text-align: left
+  &.fixed
+    position: absolute
+    bottom: 0
+    top: unset
 
 .typing
   color: #ffffff

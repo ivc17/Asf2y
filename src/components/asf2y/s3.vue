@@ -92,10 +92,8 @@ export default {
 
       var frustumSize = 5
       var aspect = window.innerHeight / window.innerWidth
-      const canvas = document.querySelector('#s3Canvas')
+      const canvas = this.$refs.s3Canvas
       const renderer = new THREE.WebGLRenderer({ canvas })
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
       const camera = new THREE.OrthographicCamera(
         frustumSize / -2,
         frustumSize / 2,
@@ -183,14 +181,16 @@ export default {
           const deltaTime = now - then
           then = now
           if (resizeRendererToDisplaySize(renderer)) {
-            const canvas = renderer.domElement
             var aspect = window.innerHeight / window.innerWidth
             camera.left = frustumSize / -2
             camera.right = frustumSize / 2
             camera.top = (frustumSize * aspect) / 2
             camera.bottom = (frustumSize * aspect) / -2
             camera.updateProjectionMatrix()
-            composer.setSize(canvas.width, canvas.height)
+            composer.setSize(
+              this.$refs.s3Canvas.clientWidth,
+              this.$refs.s3Canvas.clientHeight
+            )
           }
           composer.render(deltaTime)
           requestAnimationFrame(render)
@@ -208,8 +208,8 @@ export default {
   position: relative
 
 #s3Canvas
-  height: 100%
-  width: 100%
+  height: 100vh
+  width: 100vw
 
 .loading
   position: absolute

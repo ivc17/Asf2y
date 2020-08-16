@@ -1,5 +1,5 @@
 <template>
-  <transition v-on:enter="enter" v-on:leave="leave">
+  <transition name="fade">
     <div
       class="haiji"
       v-show="haijiInView"
@@ -8,7 +8,7 @@
       id="haiji"
     >
       <img src="@/assets/haiji1.png" class="haiji1" />
-      <transition v-on:enter="enter" v-on:leave="leave">
+      <transition name="fade">
         <img src="@/assets/haiji2.png" class="haiji2" v-if="end" />
       </transition>
     </div>
@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import Velocity from 'velocity-animate'
-
 export default {
   name: 'Haiji',
   props: {
@@ -39,23 +37,18 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  methods: {
-    enter: function(el) {
-      Velocity(el, 'fadeIn', { duration: 100 })
-    },
-    leave: function(el) {
-      Velocity(el, 'fadeOut', { duration: 100, delay: 1000 })
-    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
+@import '../../utils/global.sass'
+
 .haiji
   background-color: #000000
   width: 40%
   max-width: 500px
+  min-width: 250px
   overflow: hidden
   transition: .2s
   display: flex
@@ -65,12 +58,26 @@ export default {
   height: 0
   left: 50%
   transform: translateX(-50%)
+  align-items: center
 .haiji1
   width: 100%
 .haiji2
   position: absolute
   width: 100%
-  bottom: 0
+  bottom: 40px
   left: 0
   transform: translateY(-100%)
+
+.fade-enter-active, .fade-leave-active
+  transition: opacity .5s
+
+.fade-enter, .fade-leave-to
+  opacity: 0
+
+@media (max-width: $md)
+  .haiji1,
+    width: 160%
+  .haiji2
+    width: 160%
+    transform: translateX(-15%)
 </style>

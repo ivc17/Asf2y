@@ -158,6 +158,7 @@ export default {
       } else {
         this.fontSize = 128
       }
+      if (window.innerWidth < breakpoints.xs) this.fontSize = 50
     },
     moveText: function() {
       const el = document.querySelector('.notThereYet')
@@ -221,6 +222,10 @@ var camera,
 @media (max-width: $lg)
   .notThereYet
     font-size: 100px
+
+@media (max-width: $xs)
+  .notThereYet
+    font-size: 50px
 
 .haijiClassS5
   bottom: 300px

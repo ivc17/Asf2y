@@ -6,8 +6,8 @@
       src="../../assets/amendment.png"
       v-show="notifInView"
     />
-    <transition v-on:enter="enter" v-on:leave="leave">
-      <div class="block" v-show="blockInView">
+    <transition name="fade">
+      <div class="s2block" v-show="blockInView">
         <vue-typed-js
           :strings="[`這樣的人\n最終\n也不會摸到\n\n真正的頂峰`]"
           :loop="true"
@@ -38,7 +38,6 @@
 </template>
 
 <script lang="ts">
-import Velocity from 'velocity-animate'
 import ImageMarquee from './ImageMarquee.vue'
 import Notification from './Notification.vue'
 
@@ -109,12 +108,6 @@ export default {
         this.notifInView = false
       }
     },
-    enter: function(el) {
-      Velocity(el, 'fadeIn', { duration: 300 })
-    },
-    leave: function(el) {
-      Velocity(el, 'fadeOut', { duration: 300 })
-    },
     draw: function() {
       if (this.ctx && this.inView) {
         let numW =
@@ -176,9 +169,9 @@ let pY = 0
   transform: translateX(-50%) translateY(-50%)
   z-index: 3
 
-.block
+.s2block
   height: 500px
-  width: 300px
+  width: 310px
   background: #000000
   margin: 0 auto
   position: absolute
@@ -189,6 +182,7 @@ let pY = 0
   color: #ffffff
   font-size: 3rem
   padding: 2rem
+  overflow: hidden
   .typing
     white-space: pre-wrap
     writing-mode: vertical-rl
@@ -205,9 +199,11 @@ let pY = 0
   height: 50vh
 
 @media (max-width: $md)
-  .block
+  .s2block
     width: 50vw
-    min-width: 200px
+    min-width: 230px
+    font-size: 2rem
+    height: 420px
   .notifWrap
     width: 90vw
 
@@ -217,4 +213,10 @@ let pY = 0
   top: 50%
   transform: translateX(-50%) translateY(-50%)
   z-index: 2
+
+.fade-enter-active, .fade-leave-active
+  transition: height .3s
+
+.fade-enter, .fade-leave-to
+  height: 0
 </style>

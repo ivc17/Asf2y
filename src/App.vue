@@ -17,5 +17,4 @@
   text-align: center
   color: #000000
   font-family: $fontFamily
-  min-width: $xs
 </style>
