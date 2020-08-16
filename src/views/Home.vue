@@ -43,6 +43,7 @@ export default {
       font-size: 1.5rem
 
 .homeLink
+  cursor: pointer
   display: block
   font-weight: 300
   font-size: 1.5rem

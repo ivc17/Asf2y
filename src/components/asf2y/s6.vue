@@ -11,7 +11,6 @@
     <img src="@/assets/greens.png" class="greens" />
     <img src="@/assets/coconutTree.png" class="coconutTree" />
     <img class="makeSomeoneLaugh" src="@/assets/makeSomeoneLaugh.png" />
-    <img class="fog" src="@/assets/fog.png" />
     <img class="coconutTree" src="@/assets/forest.png" />
     <Haiji
       :haijiHeight="haijiHeight"
@@ -93,7 +92,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-@import '../../utils/global.sass'
 .s6
   position: relative
   overflow: hidden
@@ -129,14 +127,6 @@ export default {
   z-index: 3
   object-fit: cover
 
-.fog
-  position: absolute
-  left: 0
-  top: 0
-  z-index: 1
-  height: 400px
-  transform: rotate(180deg)
-
 .ascending
   position: fixed
   writing-mode: vertical-rl
@@ -159,8 +149,4 @@ export default {
       font-size: 3rem
     &:nth-child(3)
       font-size: 2rem
-
-@media (max-width:$lg )
-  .fog
-    display: none
 </style>

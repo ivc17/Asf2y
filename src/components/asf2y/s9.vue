@@ -17,10 +17,9 @@
       </div>
     </div>
     <div :class="{ underTheSun: true, fixed: fixed }" v-if="underTheSun">
-      <span class="typing">
-        今の私は、
-        <br />陽だまりの下で <br />在海的上面
-      </span>
+      <span class="typing"
+        >今の私は、<br />陽だまりの下で <br />在海的上面</span
+      >
     </div>
   </div>
 </template>
