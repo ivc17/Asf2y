@@ -86,7 +86,7 @@ export default {
           ),
           alpha: 1,
           sunColor: 0xf54263,
-          waterColor: 0x275751,
+          waterColor: 0x307482,
           distortionScale: 5,
           fog: scene.fog !== undefined
         })

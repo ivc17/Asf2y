@@ -1,5 +1,6 @@
 <template>
   <div class="s7" ref="s7">
+    <Stars class="starsWrap"></Stars>
     <Haiji
       :haijiInView="haijiInView"
       :haijiHeight="haijiHeight"
@@ -8,26 +9,27 @@
       :end="end"
     ></Haiji>
     <div id="fishWrap"></div>
-    <div></div>
   </div>
 </template>
 
 <script>
 import Haiji from './Haiji.vue'
+import Stars from './Stars.vue'
+
 export default {
   name: 'S7',
-  components: { Haiji },
+  components: { Haiji, Stars },
   mounted() {
     this.haijiTop = -window.innerHeight - 300
-    this.maxHeight = window.innerHeight + 600
+    this.maxHeight = window.innerHeight + 800
     window.addEventListener('scroll', this.handleScroll)
     this.handleScroll()
     this.handleLoadImage()
     this.handleEntry()
     this.intervalId = setInterval(() => {
       this.clearEntry()
-      setTimeout(this.handleEntry, 500)
-    }, (this.depth + 1) * 500)
+      setTimeout(this.handleEntry, this.timing)
+    }, (this.depth + 1) * this.timing)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
@@ -41,7 +43,8 @@ export default {
       haijiTop: 0,
       haijiZIndex: 0,
       maxHeight: 0,
-      depth: 6
+      depth: 5,
+      timing: 700
     }
   },
   methods: {
@@ -64,7 +67,7 @@ export default {
         this.haijiInView = false
         this.haijiZIndex = 0
       }
-      this.haijiInView = !(top < window.innerHeight / 3)
+      this.haijiInView = !(top < 10)
       this.end = this.haijiHeight === this.maxHeight
     },
     handleLoadImage: function() {
@@ -83,7 +86,7 @@ export default {
         return () => {
           const els = document.getElementsByClassName(`fish${i}`)
           if (els) {
-            if (i === 0 || i === this.depth - 1) {
+            if (i === 0) {
               if (els[1]) els[1].style.display = 'block'
             } else {
               if (els[0]) els[0].style.display = 'block'
@@ -93,7 +96,7 @@ export default {
         }
       }
       for (let i = 0; i <= this.depth; i++) {
-        setTimeout(timeout(i), 500 * i)
+        setTimeout(timeout(i), this.timing * i)
       }
     },
     clearEntry: function() {
@@ -120,77 +123,107 @@ export default {
 @import '../../utils/global.sass'
 
 $scale1: 80%
-$scale2: 70%
-$scale3: 60%
-$scale4: 50%
-$scale5: 40%
+$scale2: 60%
+$scale3: 40%
+$scale4: 20%
+$scale5: 10%
 $scale6: 30%
+$timing: .7s
 
 .s7
   position: relative
+  &:before
+    content: attr(data-text)
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(90deg,rgba(255, 0, 0, 0.06),rgba(0, 255, 0, 0.02),rgba(0, 0, 255, 0.06))
+    background-size: 100% 2px, 3px 100%
+    pointer-events: none
+    color: transparent
+  &:after
+    content: attr(data-content)
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    background: rgba(18, 16, 16, 0.1)
+    opacity: 0
+    pointer-events: none
+    animation: flicker 0.15s infinite
+    color: transparent
 
-#fishWrap
-  position: relative
+.starsWrap
+  position: absolute
+  top: 0
+  left: 0
   height: 100%
   width: 100%
+  z-index: 4
+  transform: rotate(45deg)
 
-  .fish
-    position: absolute
-    left: 50%
-    top: 50%
-    transform: translateX(-50%) translateY(-50%)
+.fish
+  position: absolute
+  right: 0
+  bottom: 0
 
-  .fish0
-    object-fit: cover
-    height: 100%
-    width: 100%
-    &.animation
-      animation: shrink0 .5s ease-out
+.fish0
+  object-fit: cover
+  height: 100%
+  width: 100%
+  &.animation
+    animation: shrink0 $timing ease-out
 
-  .fish1
-    object-fit: cover
-    height: $scale1
-    width: $scale1
-    display: none
-    &.animation
-      animation: shrink1 .5s ease-out
+.fish1
+  object-fit: cover
+  height: $scale1
+  width: $scale1
+  display: none
+  &.animation
+    animation: shrink1 $timing ease-out
 
-  .fish2
-    object-fit: cover
-    height: $scale2
-    width: $scale2
-    display: none
-    &.animation
-      animation: shrink2 .5s ease-out
-  .fish3
-    object-fit: cover
-    height: $scale3
-    width: $scale3
-    display: none
-    &.animation
-      animation: shrink3 .5s ease-out
+.fish2
+  object-fit: cover
+  height: $scale2
+  width: $scale2
+  display: none
+  &.animation
+    animation: shrink2 $timing ease-out
+.fish3
+  object-fit: cover
+  height: $scale3
+  width: $scale3
+  display: none
+  &.animation
+    animation: shrink3 $timing ease-out
 
-  .fish4
-    object-fit: cover
-    height: $scale4
-    width: $scale4
-    display: none
-    &.animation
-      animation: shrink4 .5s ease-out
+.fish4
+  object-fit: cover
+  height: $scale4
+  width: $scale4
+  display: none
+  &.animation
+    animation: shrink4 $timing ease-out
 
-  .fish5
-    object-fit: cover
-    height: $scale5
-    width: $scale5
-    display: none
-    &.animation
-      animation: shrink5 .5s ease-out
+// .fish5
+//   object-fit: cover
+//   height: $scale5
+//   width: $scale5
+//   display: none
+//   &.animation
+//     animation: shrink5 $timing ease-out
 
-  .fish6
-    object-fit: cover
-    height: $scale6
-    width: $scale6
-    display: none
+// .fish6
+//   object-fit: cover
+//   height: $scale6
+//   width: $scale6
+//   display: none
 
 @keyframes shrink0
   to
@@ -221,4 +254,68 @@ $scale6: 30%
   to
     height: $scale6
     width: $scale6
+
+@keyframes flicker
+  0%
+    opacity: 0.27861
+
+  5%
+    opacity: 0.34769
+
+  10%
+    opacity: 0.23604
+
+  15%
+    opacity: 0.90626
+
+  20%
+    opacity: 0.18128
+
+  25%
+    opacity: 0.83891
+
+  30%
+    opacity: 0.65583
+
+  35%
+    opacity: 0.67807
+
+  40%
+    opacity: 0.26559
+
+  45%
+    opacity: 0.84693
+
+  50%
+    opacity: 0.96019
+
+  55%
+    opacity: 0.08594
+
+  60%
+    opacity: 0.20313
+
+  65%
+    opacity: 0.71988
+
+  70%
+    opacity: 0.53455
+
+  75%
+    opacity: 0.37288
+
+  80%
+    opacity: 0.71428
+
+  85%
+    opacity: 0.70419
+
+  90%
+    opacity: 0.7003
+
+  95%
+    opacity: 0.36108
+
+  100%
+    opacity: 0.24387
 </style>

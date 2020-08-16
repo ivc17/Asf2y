@@ -4,28 +4,37 @@
 
     <img class="balloons" src="@/assets/balloons.png" />
     <img class="marbleAd" src="@/assets/marbleAd.png" />
-    <img class src="@/assets/makeSomeoneLaugh.png" />
-    <img class src="@/assets/candy.png" />
+    <!-- <img class src="@/assets/makeSomeoneLaugh.png" /> -->
+    <!-- <img class src="@/assets/candy.png" /> -->
 
     <img class="fog" src="@/assets/fog.png" />
     <canvas ref="s9Canvas" class="s9Canvas"></canvas>
     <div class="leftCol">
       <div>
-        <img class src="@/assets/view.png" />
+        <img class="nanYang" src="@/assets/nanYang.png" />
+        <img class="view" src="@/assets/view.png" />
+        <img class="underSun" src="@/assets/underSun.png" />
+      </div>
+      <div>
+        <img class="nanYang" src="@/assets/nanYang.png" />
+        <img class="view" src="@/assets/view.png" />
         <img class="underSun" src="@/assets/underSun.png" />
       </div>
     </div>
-    <div class="underTheSun">
-      <vue-typed-js
+    <div class="underTheSun" v-if="underTheSun">
+      <!-- <vue-typed-js
         :strings="[`今の私は、\n陽だまりの下で\n在海的上面`]"
         :loop="true"
         :typeSpeed="130"
         :showCursor="false"
         :backDelay="1000"
         :backSpeed="20"
-      >
-        <span class="typing"></span>
-      </vue-typed-js>
+      >-->
+      <span class="typing">
+        今の私は、
+        <br />陽だまりの下で <br />在海的上面
+      </span>
+      <!-- </vue-typed-js> -->
     </div>
   </div>
 </template>
@@ -40,10 +49,16 @@ export default {
   components: {},
   mounted() {
     this.initCanvas()
+    this.handleScroll()
+    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.handleResize)
   },
-  beforeDestroy() {},
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleResize)
+  },
   data: function() {
-    return {}
+    return { underTheSun: false }
   },
   methods: {
     initCanvas: function() {
@@ -52,7 +67,7 @@ export default {
       const init = () => {
         renderer = new THREE.WebGLRenderer({ canvas })
         renderer.setPixelRatio(window.devicePixelRatio)
-        renderer.setSize(canvas.width, canvas.height)
+        renderer.setSize(600, window.innerHeight * 0.2)
 
         scene = new THREE.Scene()
 
@@ -136,7 +151,11 @@ export default {
       const canvas = this.$refs.s9Canvas
       camera.aspect = canvas.width / canvas.height
       camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setSize(600, window.innerHeight * 0.2)
+    },
+    handleScroll: function() {
+      const { top } = this.$refs.s9.getBoundingClientRect()
+      this.underTheSun = top < window.innerHeight * 0.2
     }
   }
 }
@@ -152,34 +171,36 @@ var camera,
 
 .s9
   position: relative
-  img
-    width: 100px
-    &.sunny
-      height: 100%
-      right: 50%
-      position: absolute
-      width: auto
-      z-index: -1
-    &.marbleAd
-      position: absolute
-      height: 60%
-      width: auto
-      top: 20%
-      left: 10%
-    &.fog
-      // position: absolute
-      // right: 0
-      // width: 70%
-      // height: 40%
-      // object-fit: cover
-      // top: 30%
-    &.balloons
-      position: absolute
-      right: 0
-      width: 60%
-      height: 30%
-      object-fit: cover
-      top: 30%
+  overflow: hidden
+.sunny
+  object-fit: cover
+  height: 100%
+  right: 50%
+  position: absolute
+  width: auto
+  z-index: -1
+.marbleAd
+  position: absolute
+  height: 60%
+  width: auto
+  top: 20%
+  left: 10%
+  z-index: 3
+.fog
+  position: absolute
+  right: 0
+  width: 30%
+  height: 30%
+  object-fit: cover
+  top: 30%
+.balloons
+  position: absolute
+  right: 0
+  width: 60%
+  height: 30%
+  object-fit: cover
+  top: 30%
+  z-index: 1
 
 .leftCol
   position: absolute
@@ -188,40 +209,53 @@ var camera,
   height: 100%
   width: 100%
   display: flex
-  justify-content: flex-end
+  flex-direction: column
+  align-items: flex-end
+  justify-content: flex-start
   &>div
     position: relative
-    width: 30%
-    height: 100%
-    .underSun
-      object-fit: cover
-      width: 100%
+    width: 50%
+    height: 100vh
+    animation: shift 5s linear infinite
+    img
+      display: block
       right: 0
-      bottom: 0
-      position: absolute
-    .view
+      height: 33.3vh
+      width: 100%
+      object-fit: cover
+
+@keyframes shift
+  from
+    transform: translateY(0)
+  to
+    transform: translateY(-100%)
+
+@media (max-width:$lg)
+  .leftCol>div
+    width: 30%
+  .sunny
+    width: 70%
 
 .s9Canvas
   position: absolute
-  height: 30%
-  width: 30%
+  height: 20%
+  width: 35%
   bottom: 0
   left: 50%
-  transform: translateX(-50%)
+  transform: translateX(-30%)
   z-index: 4
 
 .underTheSun
-  top: 30%
+  top: 40%
+  width: 60%
   right: 0
-  width: 30%
   position: fixed
   bottom: 0
-  left: 50%
-  transform: translateX(-50%)
+  z-index: 5
+
 .typing
-  width: 100%
   color: #ffffff
-  font-size: 3rem
+  font-size: 2rem
   font-weight: 900
   white-space: pre-wrap
   text-align: left

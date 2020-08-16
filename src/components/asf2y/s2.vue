@@ -9,7 +9,7 @@
     <transition v-on:enter="enter" v-on:leave="leave">
       <div class="block" v-show="blockInView">
         <vue-typed-js
-          :strings="[`舒斯牠錯著ㄓㄨ\n錯著ㄓㄨ舒斯牠`, '舒斯牠錯著ㄓㄨ']"
+          :strings="[`這樣的人\n最終\n也不會摸到\n\n真正的頂峰`]"
           :loop="true"
           :typeSpeed="130"
           :showCursor="false"

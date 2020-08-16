@@ -30,6 +30,9 @@
     <section>
       <S9 v-if="findIsShow('s9')"></S9>
     </section>
+    <section>
+      <Back v-if="findIsShow('back')"></Back>
+    </section>
   </div>
 </template>
 
@@ -45,6 +48,7 @@ import S6 from '@/components/asf2y/s6.vue'
 import S7 from '@/components/asf2y/s7.vue'
 import S8 from '@/components/asf2y/s8.vue'
 import S9 from '@/components/asf2y/s9.vue'
+import Back from '@/components/asf2y/Back.vue'
 
 export default {
   name: 'asf2y',
@@ -58,7 +62,8 @@ export default {
     S6,
     S7,
     S8,
-    S9
+    S9,
+    Back
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll)
@@ -68,7 +73,19 @@ export default {
   },
   data: function() {
     return {
-      screens: ['title', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9'],
+      screens: [
+        'title',
+        's1',
+        's2',
+        's3',
+        's4',
+        's5',
+        's6',
+        's7',
+        's8',
+        's9',
+        'back'
+      ],
       current: ['title', 's1']
     }
   },

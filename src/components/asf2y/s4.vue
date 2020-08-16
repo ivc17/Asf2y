@@ -263,4 +263,9 @@ export default {
     right: 30px
     font-size: 16px
     line-height: 26px
+
+@media (max-height: 800px)
+  .s4Text
+    bottom: unset
+    top: 40vh
 </style>

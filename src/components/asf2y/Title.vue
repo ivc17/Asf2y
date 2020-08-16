@@ -2,9 +2,13 @@
   <div class="wrap-titles">
     <div class="titles">
       <div class="titles-position">
-        <Crt :data-text="mand" classname="mand"></Crt>
+        <Crt :data-text="mand" class="mand"></Crt>
         <Crt :data-text="eng"></Crt>
       </div>
+    </div>
+    <div class="sun">
+      <p>太</p>
+      <p>陽</p>
     </div>
   </div>
 </template>
@@ -122,4 +126,13 @@ export default {
 
 .titles-position
   transform: translateY(-50%)
+
+.sun
+  position: absolute
+  top: 0
+  font-weight: 900
+  font-size: 30rem
+  text-stroke: 1px black
+  -webkit-text-stroke: 1px black
+  color: rgba(0, 0, 0, 0)
 </style>

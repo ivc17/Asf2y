@@ -2,7 +2,7 @@
   <div class="s3" ref="s3">
     <canvas id="s3Canvas" ref="s3Canvas"></canvas>
     <Sun
-      :class="{ sun: true, parallex: parallex }"
+      :class="{ sunSign: true, parallex: parallex }"
       v-if="loaderOff"
       :style="parallexStyle"
     ></Sun>
@@ -232,7 +232,7 @@ export default {
   margin-left: auto
   white-space: pre-wrap
 
-.sun
+.sunSign
   z-index: 3
   position: absolute
   right: 0
@@ -243,7 +243,7 @@ export default {
   bottom: 100px
 
 @media (min-width: $lg)
-  .sun
+  .sunSign
     max-width: 1200px
   .parallex
     bottom: 0
