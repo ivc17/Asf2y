@@ -1,5 +1,6 @@
 <template>
   <div class="asf2y" ref="asf2y">
+    <Control link="/" />
     <section ref="sectionT">
       <Title v-if="findIsShow('title')"></Title>
     </section>
@@ -38,6 +39,7 @@
 
 <script>
 import Velocity from 'velocity-animate'
+import Control from '@/components/Control.vue'
 import Title from '@/components/asf2y/Title.vue'
 import S1 from '@/components/asf2y/s1.vue'
 import S2 from '@/components/asf2y/s2.vue'
@@ -63,7 +65,8 @@ export default {
     S7,
     S8,
     S9,
-    Back
+    Back,
+    Control
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll)
