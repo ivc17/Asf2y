@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Control link="https://ivc17.github.io" :isExternal="true" :stable="true" />
     <router-link to="/AfterSleepigFor2Years" class="homeLink">
       <p class="instruction">
         Please scroll through it slowly
@@ -7,14 +8,16 @@
         <br />
         <br />適合像看書一樣慢慢滑
       </p>
-      <router-link class="forward" to="/afterSleepigFor2Years"> </router-link>
+      <router-link class="forward" to="/afterSleepigFor2Years"></router-link>
     </router-link>
   </div>
 </template>
 
 <script>
+import Control from '@/components/Control.vue'
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: { Control }
 }
 </script>
 
@@ -43,14 +46,11 @@ export default {
       font-size: 1rem
 
 .forward
-  background-color: transparent
-  border: none
-  display: flex
   width: 100px
   height: 100px
   display: block
   cursor: pointer
-  background-image: url('../assets/forward.svg')
+  background-image: url('../assets/icons/forwardIcon.svg')
   background-repeat: no-repeat
   background-size: 100px 100px
 
