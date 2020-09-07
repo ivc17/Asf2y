@@ -46,13 +46,20 @@ export default {
       font-size: 1rem
 
 .forward
-  width: 100px
-  height: 100px
+  z-index: 5
+  width: 140px
+  height: 40px
   display: block
   cursor: pointer
-  background-image: url('../assets/icons/forwardIcon.svg')
+  border-radius: 100px
+  background-image: url('../assets/icons/forwardIconWhite.svg'), linear-gradient(to right, #000000,  #000000)
   background-repeat: no-repeat
-  background-size: 100px 100px
+  background-size: 140px 40px
+  background-position: center center
+  &:hover
+    transform: scale(0.8, 2.2)
+    background-size: 100px 100px
+    background-image: url('../assets/icons/forwardIcon.svg')
 
 @media (max-width: $sm)
   .home
