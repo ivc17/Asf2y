@@ -6,7 +6,9 @@
       <img src="@/assets/olSea.svg" class="titleBg sea" />
     </div>
     <transition name="fade">
-      <router-link to="/" class="return" v-show="inView">返回</router-link>
+      <button class="return" v-show="inView" v-on:click="handleBack">
+        BACK
+      </button>
     </transition>
   </div>
 </template>
@@ -30,6 +32,13 @@ export default {
     handleScroll: function() {
       const { top } = this.$refs.back.getBoundingClientRect()
       this.inView = top <= 50
+    },
+    handleBack: function() {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
     }
   }
 }
@@ -60,18 +69,26 @@ export default {
   &.sea
     transform: rotate(180deg)
 
+
 .return
   display: block
   font-weight: 900
-  font-size: 10rem
+  font-size: 4rem
   position: absolute
-  top: 0
+  border: none
+  background-color: transparent
+  backround: none
+  top: 30%
   color: #000000
   text-decoration: none
+  &:hover,:active,focus
+    transform: scale(1.1)
+    transform-origin: 0 50%
+    cursor: pointer
 
 @media (min-width: 80rem) and (min-height:40rem)
   .return
-    font-size: 40rem
+    font-size: 20rem
 
 @media (max-width: $lg)
   .bg
