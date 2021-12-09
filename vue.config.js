@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/Asf2y/' : '/'
+  publicPath: process.env.NODE_ENV === 'production' ? '/asf2y-view/' : '/'
 }
